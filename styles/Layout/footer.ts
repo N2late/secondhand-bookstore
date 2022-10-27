@@ -4,12 +4,12 @@ export const styles = {
   footer: css`
     background-color: #a8866e;
     width: 100%;
-    height: 270px;
+    height: 230px;
     display: flex;
     padding: 40px;
+    padding-top: 10px;
     justify-content: space-between;
-    position: absolute;
-    bottom: 0;
+    margin-top: 50px;
     font-size: 12px;
   `,
   info: css`

@@ -3,8 +3,11 @@ import { css } from '@emotion/react';
 export const styles = {
   header: css`
     position: fixed;
-    width: 100%;
+    top: 0;
+    width: 95%;
     height: 80px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
   `,
   container: css`
     display: flex;
@@ -13,9 +16,7 @@ export const styles = {
     height: 100%;
   `,
 
-  logo: css`
-    margin-left: 40px;
-  `,
+  logo: css``,
   searchBar: css`
     position: relative;
     left: -10%;
