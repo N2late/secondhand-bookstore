@@ -1,22 +1,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { styles } from '../styles/bookCard';
-import { Book } from '../types/books';
+import { BookSmallPreview } from '../types/book';
 
 type Props = {
-  book: Book;
+  book: BookSmallPreview;
 };
 
 function BookCard(props: Props) {
   const { book } = props;
-  const { title, author, price, path } = book;
+  const { title, author, price, imgPath } = book;
 
   return (
     <div css={styles.bookCardContainer}>
       <div css={styles.bookInnerContainer}>
-        <Link href="#abc">
+        <Link href={`/books/${book.id}`}>
           <Image
-            src={path}
+            src={imgPath}
             width={150}
             height={175}
             alt={`${title} book cover`}

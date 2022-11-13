@@ -12,6 +12,8 @@ export const styles = {
     flex-direction: column;
     position: relative;
     background-color: white;
+    margin-bottom: 25px;
+    margin-right: 25px;
     cursor: pointer;
     &:hover {
       border: 1px solid #a8866e;
