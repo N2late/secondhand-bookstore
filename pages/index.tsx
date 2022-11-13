@@ -3,9 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import BookCard from '../components/BookCard';
 import { styles } from '../styles/home';
-import { Book, books } from '../types/books';
+import { BookSmallPreview } from '../types/book';
 
-export default function Home() {
+type Props = {
+  books: BookSmallPreview[];
+};
+
+export default function Home({ books }: Props) {
   return (
     <>
       <Head>
@@ -24,10 +28,10 @@ export default function Home() {
             />
             <h2>The platform to buy and sell used books</h2>
             <div css={styles.btnContainer}>
-              <Link href="/buy">
+              <Link href="/books/buy">
                 <button css={styles.heroButton}>BUY</button>
               </Link>
-              <Link href="/sell">
+              <Link href="/books/add">
                 <button css={styles.heroButton}>SELL</button>
               </Link>
             </div>
@@ -49,9 +53,9 @@ export default function Home() {
             </p>
           </div>
           <div css={styles.bookContainer}>
-            {books.map((book) => (
-              <BookCard key={book.id} book={book} />
-            ))}
+            {books.map((book: BookSmallPreview, index) =>
+              index < 4 ? <BookCard key={book.id} book={book} /> : null,
+            )}
           </div>
         </div>
       </section>
@@ -70,12 +74,23 @@ export default function Home() {
             </p>
           </div>
           <div css={styles.bookContainer}>
-            {books.map((book) => (
-              <BookCard key={book.id} book={book} />
-            ))}
+            {books.map((book: BookSmallPreview, index) =>
+              index < 4 ? <BookCard key={book.id} book={book} /> : null,
+            )}
           </div>
         </div>
       </section>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const res = await fetch('http://localhost:3000/api/books');
+  const books = await res.json();
+
+  return {
+    props: {
+      books,
+    },
+  };
 }

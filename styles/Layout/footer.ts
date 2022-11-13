@@ -9,8 +9,8 @@ export const styles = {
     padding: 40px;
     padding-top: 10px;
     justify-content: space-between;
-    margin-top: 50px;
     font-size: 12px;
+    margin-top: auto;
   `,
   info: css`
     display: flex;

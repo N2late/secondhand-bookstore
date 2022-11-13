@@ -8,38 +8,44 @@ export const styles = {
     height: 80px;
     margin-left: 2.5%;
     margin-right: 2.5%;
+    z-index: 1;
+    background-color: white;
   `,
   container: css`
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    margin-right: 2%;
   `,
 
   logo: css``,
   searchBar: css`
+    width: 27%;
     position: relative;
-    left: -10%;
+    left: -5%;
     background-color: #f8ede3;
     border-radius: 8px;
-    width: 350px;
     height: 45px;
     display: flex;
     align-items: center;
     padding: 0 20px;
     input {
       margin-left: 4px;
-      width: 325px;
-      height: 40px;
+      width: 100%;
+      height: 100%;
       background-color: #f8ede3;
       border: none;
     }
   `,
-  nav: css``,
+  nav: css`
+    width: 35%;
+  `,
   navList: css`
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 40px;
+
     list-style: none;
     font-weight: 700;
     font-size: 20px;
@@ -49,6 +55,7 @@ export const styles = {
     }
   `,
   navItem: css`
-    margin-right: 12px;
+    flex: 1;
+    margin-right: 8px;
   `,
 };
