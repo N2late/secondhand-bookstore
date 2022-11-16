@@ -51,6 +51,8 @@ export default function BookDetails(props: Props) {
     setLoading(false);
   }, [user.id, book.userId]);
 
+  console.log('img', book.imgPath);
+
   async function handleBookDelete() {
     const deleteBook = await fetch(`/api/books/${book.id}`, {
       method: 'DELETE',
@@ -64,6 +66,8 @@ export default function BookDetails(props: Props) {
       await router.push('/');
     }
   }
+
+  console.log('path', book.imgPath.slice(49));
 
   return (
     <>
@@ -107,9 +111,8 @@ export default function BookDetails(props: Props) {
             <div css={bookDetailsStyles.bookDetailsContainer}>
               <div css={bookDetailsStyles.bookCover}>
                 <div css={bookDetailsStyles.imgContainer}>
-                  <Image
+                  <img
                     src={book.imgPath}
-                    fill
                     alt={`${book.title} book cover`}
                     css={bookDetailsStyles.img}
                   />

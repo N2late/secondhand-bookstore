@@ -29,8 +29,6 @@ export default function Inbox({ conversations }: Props) {
     useState('buyer');
   const [deleteConversationId, setDeleteConversationId] = useState([]);
 
-  console.log(buyerConversations);
-
   return (
     <>
       <Head>

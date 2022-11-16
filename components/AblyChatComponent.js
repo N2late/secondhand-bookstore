@@ -16,17 +16,20 @@ const AblyChatComponent = ({
   const [receivedMessages, setReceivedMessages] = useState(conversationHistory);
   const messageTextIsEmpty = messageText.trim().length === 0;
 
-  console.log('receivedMessages', receivedMessages);
+  const [channel] = useChannel(JSON.stringify(conversation), (message) => {
+    // Here we're computing the state that'll be drawn into the message history
+    // We do that by slicing the last 199 messages from the receivedMessages buffer
+    const history = receivedMessages.slice(-199);
+    setReceivedMessages([...history, message]);
+  });
 
-  const [channel, ably] = useChannel(
-    JSON.stringify(conversation),
-    (message) => {
-      // Here we're computing the state that'll be drawn into the message history
-      // We do that by slicing the last 199 messages from the receivedMessages buffer
-      const history = receivedMessages.slice(-199);
-      setReceivedMessages([...history, message]);
-    },
-  );
+  let hostname;
+  if (typeof window !== 'undefined') {
+    hostname = window.location.hostname;
+  }
+
+  const domain =
+    hostname === 'localhost' ? '' : 'https://secondhand-bookstore.fly.dev/';
 
   async function sendChatMessage() {
     channel.publish({
@@ -35,7 +38,7 @@ const AblyChatComponent = ({
     });
     // for saving the message in the database
     try {
-      await fetch(`../api/inbox/message`, {
+      await fetch(`${domain}../api/inbox/message`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +67,6 @@ const AblyChatComponent = ({
     await sendChatMessage();
   }
 
-  console.log('receivedMessages', receivedMessages);
   const messages = receivedMessages.map((message) => {
     const sender = message.senderId || message.name.replaceAll('"', '');
     const author =
@@ -72,14 +74,6 @@ const AblyChatComponent = ({
       message.senderId === myPersonalData.id
         ? 'me'
         : correspondent.username;
-
-    // get last index of message with senderId equals to mypersonaldata.id
-    console.log(sender === myPersonalData.username);
-    console.log('message.senderId', message.name);
-    console.log('myPersonalData:', myPersonalData.username);
-    console.log('sender', sender);
-    console.log('author', author);
-    console.log('correspondent', correspondent);
 
     return (
       <div
@@ -98,7 +92,11 @@ const AblyChatComponent = ({
           <br />
           {message.createdAt
             ? message.createdAt
-            : new Date(message.timestamp).toLocaleTimeString().slice(0, 5)}{' '}
+            : new Date(message.timestamp).toLocaleString('de-AT', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
         </p>
       </div>
     );

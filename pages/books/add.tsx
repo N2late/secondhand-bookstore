@@ -51,6 +51,15 @@ export default function AddBookForSell({
   const [reserved, setReserved] = useState(false);
   const [errors, setErrors] = useState<{ message: string }[]>([]);
   const router = useRouter();
+
+  let hostname;
+  if (typeof window !== 'undefined') {
+    hostname = window.location.hostname;
+  }
+
+  const domain =
+    hostname === 'localhost' ? '' : 'https://secondhand-bookstore.fly.dev';
+
   /**
    * I'm trying to send a POST request to the server with a body that contains a book object and a
    * genres array in order to add a new book to be sold.
@@ -81,7 +90,7 @@ export default function AddBookForSell({
       genres,
     };
 
-    const res = await fetch('/api/books', {
+    const res = await fetch(`${domain}/api/books`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

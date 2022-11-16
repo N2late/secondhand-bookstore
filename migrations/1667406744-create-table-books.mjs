@@ -12,7 +12,7 @@ CREATE TABLE books (
   synopsis VARCHAR(1000),
   img_path VARCHAR(150) NOT NULL,
   price DECIMAL(5,2) NOT NULL,
-  shipping_costs_included BOOLEAN NOT NULL DEFAULT false,
+  shipping_included BOOLEAN NOT NULL DEFAULT false,
   sold BOOLEAN NOT NULL DEFAULT false,
   reserved BOOLEAN NOT NULL DEFAULT false,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)
