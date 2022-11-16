@@ -8,6 +8,7 @@ type Props = {
   setSendMessage: (value: boolean) => void;
   bookId: number;
   sellerId: number;
+  userId: number;
 };
 
 function MessageBox({
@@ -16,6 +17,7 @@ function MessageBox({
   setSendMessage,
   bookId,
   sellerId,
+  userId,
 }: Props) {
   const [message, setMessage] = useState('');
   const [messageSentError, setMessageSentError] = useState('');
@@ -25,14 +27,15 @@ function MessageBox({
       setMessageSentError('Please write a message');
       return;
     }
-    const data = await fetch('/api/messages', {
+    const data = await fetch('/api/inbox', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        sellerId,
+        buyerId: userId,
         bookId,
-        recipientId: sellerId,
         messageBody: message,
       }),
     });

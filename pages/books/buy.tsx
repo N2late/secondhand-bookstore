@@ -30,7 +30,9 @@ export default function Buy({ genres, languages, books }: Props) {
     handleCheckbox,
     filter,
     setFilter,
+    recentlyReleased,
   } = useSearch();
+
   const [maxBooks, setMaxBooks] = useState(8);
   const router = useRouter();
 
@@ -128,6 +130,7 @@ export default function Buy({ genres, languages, books }: Props) {
               <div css={buyStyles.filterItem}>
                 <label htmlFor="RecentlyReleased">Recently Released</label>
                 <input
+                  checked={recentlyReleased}
                   type="checkbox"
                   name="RecentlyReleased"
                   id="RecentlyReleased"

@@ -31,3 +31,15 @@ export type BookWithUserLangConditionGenres = Book & {
   seller: User['username'];
   shippingIncluded: boolean;
 };
+
+export type BookWithUsername = {
+  id: number;
+  title: string;
+  author: string;
+  userId: number;
+  imgPath: string;
+  price: number;
+  seller: string;
+  shippingIncluded: boolean;
+  sold: boolean;
+};

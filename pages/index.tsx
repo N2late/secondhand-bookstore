@@ -2,14 +2,24 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import BookCard from '../components/BookCard';
+import {
+  get4BooksByCreatedAt,
+  get4BooksByReleaseDate,
+} from '../database/books';
 import { styles } from '../styles/home';
 import { BookSmallPreview } from '../types/book';
+import { useSearch } from '../utilis/search';
 
 type Props = {
-  books: BookSmallPreview[];
+  recentlyAddedBooks: BookSmallPreview[];
+  recentlyReleasedBooks: BookSmallPreview[];
 };
 
-export default function Home({ books }: Props) {
+export default function Home({
+  recentlyAddedBooks,
+  recentlyReleasedBooks,
+}: Props) {
+  const { setRecentlyReleased } = useSearch();
   return (
     <>
       <Head>
@@ -53,9 +63,9 @@ export default function Home({ books }: Props) {
             </p>
           </div>
           <div css={styles.bookContainer}>
-            {books.map((book: BookSmallPreview, index) =>
-              index < 4 ? <BookCard key={book.id} book={book} /> : null,
-            )}
+            {recentlyAddedBooks.map((book: BookSmallPreview) => (
+              <BookCard key={book.id} book={book} />
+            ))}
           </div>
         </div>
       </section>
@@ -63,20 +73,25 @@ export default function Home({ books }: Props) {
         <div css={styles.sectionInnerContainerRecentAdded}>
           <div css={styles.recentlyAddedTitle}>
             <h3>Recently Released Books</h3>
-            <p>
-              View all{' '}
-              <Image
-                src="/chevron-right.png"
-                width={12}
-                height={12}
-                alt="view all icon"
-              />
-            </p>
+            <Link
+              href="/books/buy?search=&genre=All&language=All&recentlyReleased=true%20%20%20%20%20%20%20%20&price=asc&recentlyAdded=asc"
+              onClick={setRecentlyReleased(true) as any}
+            >
+              <p>
+                View all{' '}
+                <Image
+                  src="/chevron-right.png"
+                  width={12}
+                  height={12}
+                  alt="view all icon"
+                />
+              </p>
+            </Link>
           </div>
           <div css={styles.bookContainer}>
-            {books.map((book: BookSmallPreview, index) =>
-              index < 4 ? <BookCard key={book.id} book={book} /> : null,
-            )}
+            {recentlyReleasedBooks.map((book: BookSmallPreview) => (
+              <BookCard key={book.id} book={book} />
+            ))}
           </div>
         </div>
       </section>
@@ -85,12 +100,15 @@ export default function Home({ books }: Props) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/books');
-  const books = await res.json();
+  const recentlyAddedBooks = await get4BooksByCreatedAt();
+  const recentlyReleasedBooks = await get4BooksByReleaseDate();
 
+  console.log('recentlyAddedBooks', recentlyAddedBooks);
+  console.log('recentlyReleasedBooks', recentlyReleasedBooks);
   return {
     props: {
-      books,
+      recentlyAddedBooks,
+      recentlyReleasedBooks,
     },
   };
 }

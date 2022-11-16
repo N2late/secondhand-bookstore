@@ -209,6 +209,7 @@ export default function BookDetails(props: Props) {
                       setSendMessage={setSendMessage}
                       bookId={book.id}
                       sellerId={book.userId}
+                      userId={user.id}
                     />
                   )}
                 </div>

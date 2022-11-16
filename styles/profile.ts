@@ -6,7 +6,6 @@ export const profileStyles = {
     margin-top: 100px;
     width: 95%;
     height: fit-content;
-
     h1 {
       font-size: 28px;
       font-weight: 800;
