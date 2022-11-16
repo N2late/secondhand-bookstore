@@ -120,5 +120,7 @@ function useProvideSearch() {
     handleOnSubmit,
     handleCheckbox,
     setFilter,
+    recentlyReleased,
+    setRecentlyReleased,
   };
 }

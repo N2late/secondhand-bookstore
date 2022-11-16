@@ -32,12 +32,24 @@ export const styles = {
       font-size: 28px;
       font-weight: 800;
     }
+    @media screen and (max-width: 900px) {
+      h2 {
+        font-size: 16px;
+        margin-top: -10px;
+      }
+      img {
+        margin-top: -10px;
+      }
+    }
   `,
   btnContainer: css`
     display: flex;
     justify-content: center;
     margin-top: 20px;
     gap: 20px;
+    @media screen and (max-width: 900px) {
+      margin-top: 8px;
+    }
   `,
   heroButton: css`
     width: 100px;
@@ -57,13 +69,17 @@ export const styles = {
     :focus {
       transform: scale(0.9);
     }
+    @media screen and (max-width: 900px) {
+      width: 50px;
+      height: 100%;
+    }
   `,
 
   sectionRecentAdded: css`
     width: 95%;
     margin: 0 auto;
     margin-top: 40px;
-    height: 380px;
+    height: fit-content;
   `,
 
   sectionRecentReleased: css`
@@ -73,6 +89,7 @@ export const styles = {
     height: 380px;
     background-color: #f1f1f1;
     border-radius: 12px;
+    height: fit-content;
   `,
   recentlyAddedTitle: css`
     display: flex;
@@ -92,6 +109,7 @@ export const styles = {
   bookContainer: css`
     display: flex;
     flex-wrap: wrap;
+    height: fit-content;
     justify-content: space-between;
     margin-top: 20px;
     margin-left: 25px;

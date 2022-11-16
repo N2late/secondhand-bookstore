@@ -77,7 +77,7 @@ function Header({ user }: Props) {
             ) : (
               <>
                 <li css={styles.navItem}>
-                  <Link href="#abc">
+                  <Link href="/inbox">
                     <Image
                       src="/email_icon.png"
                       alt="inbox"

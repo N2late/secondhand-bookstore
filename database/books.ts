@@ -1,4 +1,4 @@
-import { Book, BookSmallPreview } from '../types/book';
+import { Book, BookSmallPreview, BookWithUsername } from '../types/book';
 import { sql } from './connect';
 
 // create book
@@ -140,6 +140,40 @@ export function getBooksByUserId(userId: string) {
     SELECT id, title, author, price, img_path FROM books
     WHERE user_id = ${userId}
     ORDER by price ASC, created_at ASC
+  `;
+  return books;
+}
+
+// get book by book.id with user.username
+export async function getBookByIdWithUsername(bookId: number) {
+  const [book] = await sql<BookWithUsername[]>`
+    SELECT books.id, books.title, books.author, books.user_id, books.img_path, books.price, books.shipping_included, books.sold, users.username AS seller
+    FROM books
+    INNER JOIN users ON books.user_id = users.id
+    WHERE books.id = ${bookId}
+  `;
+
+  return book;
+}
+
+// get 4 books created at most recently
+export async function get4BooksByCreatedAt() {
+  const books = await sql<BookSmallPreview[]>`
+    SELECT id, title, author, img_path, price FROM books
+    WHERE sold = false
+    ORDER by created_at DESC
+    LIMIT 4
+  `;
+  return books;
+}
+
+// get 4 books recently released
+export async function get4BooksByReleaseDate() {
+  const books = await sql<BookSmallPreview[]>`
+    SELECT id, title, author, img_path, price FROM books
+    WHERE sold = false
+    ORDER by release_date DESC NULLS LAST
+    LIMIT 4
   `;
   return books;
 }

@@ -77,3 +77,10 @@ export async function deleteUser(id: number) {
 `;
   return user;
 }
+
+export async function getUserByIdWithImgPath(id: number) {
+  const [user] = await sql<{ imgPath: string }[]>`
+  SELECT id, username, img_path FROM users WHERE id = ${id}
+`;
+  return user;
+}

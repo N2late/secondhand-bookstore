@@ -17,6 +17,7 @@
     "@types/lodash": "^4.14.187",
     "@types/react-datepicker": "^4.8.0",
     "@types/sharp": "^0.31.0",
+    "ably": "1.2.5-beta.1",
     "bcrypt": "^5.1.0",
     "cookie": "^0.5.0",
     "csrf": "^3.1.0",
