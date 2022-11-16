@@ -15,12 +15,15 @@ export default async function handler(
   if (req.method === 'POST') {
     const session = await getValidSessionByToken(req.cookies.sessionToken);
 
+    console.log('I am here 1');
+
     /* This is checking if the user is logged in. If they are not, it will return an error. */
     if (!session) {
       return res.status(400).json({
         errors: [{ message: 'Unauthorized. No valid session token passed' }],
       });
     }
+    console.log('I am here 2');
 
     const { title, author, bookConditionId, languageId, imgPath, price } =
       req.body.book;
@@ -58,10 +61,10 @@ export default async function handler(
           errors: [{ message: 'At least one genre is required' }],
         });
     }
-
+    console.log('I am here 3');
     /* Creating a new book. */
     const newBook = await createBook(req.body.book);
-
+    console.log('I am here 4');
     /* Inserting the genres of the book into the database. */
     genres.map(async (genre: string) => {
       await insertBookGenre(Number(newBook[0].id), Number(genre));

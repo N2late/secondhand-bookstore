@@ -154,8 +154,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     conversationHistory as any,
   );
 
-  console.log('conversationHistory', conversationHistory);
-
   return {
     props: {
       conversationInfo,

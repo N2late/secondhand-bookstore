@@ -103,8 +103,6 @@ export async function getServerSideProps() {
   const recentlyAddedBooks = await get4BooksByCreatedAt();
   const recentlyReleasedBooks = await get4BooksByReleaseDate();
 
-  console.log('recentlyAddedBooks', recentlyAddedBooks);
-  console.log('recentlyReleasedBooks', recentlyReleasedBooks);
   return {
     props: {
       recentlyAddedBooks,
