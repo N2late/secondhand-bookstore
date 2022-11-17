@@ -73,10 +73,7 @@ export default function Home({
         <div css={styles.sectionInnerContainerRecentAdded}>
           <div css={styles.recentlyAddedTitle}>
             <h3>Recently Released Books</h3>
-            <Link
-              href="/books/buy?search=&genre=All&language=All&recentlyReleased=true%20%20%20%20%20%20%20%20&price=asc&recentlyAdded=asc"
-              onClick={setRecentlyReleased(true) as any}
-            >
+            <Link href="/books/buy?search=&genre=All&language=All&recentlyReleased=true%20%20%20%20%20%20%20%20&price=asc&recentlyAdded=asc">
               <p>
                 View all{' '}
                 <Image

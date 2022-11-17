@@ -17,8 +17,13 @@ export function Anchor({
 }
 
 function Header({ user }: Props) {
-  const { handleSearchOnKeyPress, handleOnChangeSearch, setSearch, setFilter } =
-    useSearch();
+  const {
+    handleSearchOnKeyPress,
+    handleOnChangeSearch,
+    setSearch,
+    setFilter,
+    setRecentlyReleased,
+  } = useSearch();
   const router = useRouter();
   const page = router.pathname;
 
@@ -57,6 +62,7 @@ function Header({ user }: Props) {
                 onClick={() => {
                   setSearch('');
                   setFilter({ genre: 'All', language: 'All' });
+                  setRecentlyReleased(false);
                 }}
               >
                 Buy

@@ -31,6 +31,7 @@ export default function Buy({ genres, languages, books }: Props) {
     filter,
     setFilter,
     recentlyReleased,
+    setRecentlyReleased,
   } = useSearch();
 
   const [maxBooks, setMaxBooks] = useState(8);
@@ -45,6 +46,7 @@ export default function Buy({ genres, languages, books }: Props) {
         language: router.query.language as string,
         genre: router.query.genre as string,
       });
+      setRecentlyReleased(router.query.recentlyReleased);
     } else {
       return setFilter({
         genre: 'All',
