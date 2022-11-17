@@ -1,6 +1,7 @@
 // book details page
 
 import { GetServerSidePropsContext } from 'next';
+import { CldImage } from 'next-cloudinary';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -67,7 +68,7 @@ export default function BookDetails(props: Props) {
     }
   }
 
-  console.log('path', book.imgPath.slice(49));
+  console.log('path', book.imgPath.slice(50));
 
   return (
     <>
@@ -111,8 +112,10 @@ export default function BookDetails(props: Props) {
             <div css={bookDetailsStyles.bookDetailsContainer}>
               <div css={bookDetailsStyles.bookCover}>
                 <div css={bookDetailsStyles.imgContainer}>
-                  <img
-                    src={book.imgPath}
+                  <CldImage
+                    src={book.imgPath.slice(50)}
+                    width={300}
+                    height={400}
                     alt={`${book.title} book cover`}
                     css={bookDetailsStyles.img}
                   />

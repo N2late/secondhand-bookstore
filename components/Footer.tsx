@@ -37,18 +37,13 @@ function Footer() {
         <div css={styles.social}>
           <div css={styles.socialIcons}>
             <Link href="www.facebook.com">
-              <Image
-                src="/../public/fb_logo.png"
-                alt="Facebook"
-                width={32}
-                height={32}
-              />
+              <Image src="/fb_logo.png" alt="Facebook" width={32} height={32} />
             </Link>
           </div>
           <div css={styles.socialIcons}>
             <Link href="www.instagram.com">
               <Image
-                src="/../public/insta_logo.png"
+                src="/insta_logo.png"
                 alt="Instagram"
                 width={32}
                 height={32}
@@ -58,7 +53,7 @@ function Footer() {
           <div css={styles.socialIcons}>
             <Link href="www.twitter.com">
               <Image
-                src="/../public/twitter_logo.png"
+                src="/twitter_logo.png"
                 alt="Twitter"
                 width={32}
                 height={32}
@@ -68,7 +63,7 @@ function Footer() {
           <div css={styles.socialIcons}>
             <Link href="www.youtube.com">
               <Image
-                src="/../public/youtube_logo.png"
+                src="/youtube_logo.png"
                 alt="Youtube"
                 width={32}
                 height={32}
@@ -76,12 +71,7 @@ function Footer() {
             </Link>
           </div>
         </div>
-        <Image
-          src="/../public/location.png"
-          alt="location"
-          width={16}
-          height={16}
-        />
+        <Image src="/location.png" alt="location" width={16} height={16} />
         <span>Austria</span>
         <p>© 2022 | Hand-Me All Rights Reserved</p>
       </div>
