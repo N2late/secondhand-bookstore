@@ -4,6 +4,7 @@ env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   ABLY_API_KEY: ${{ secrets.ABLY_API_KEY }}
   CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }}
+  NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}
 jobs:
   deploy:
     name: Deploy to Fly.io
