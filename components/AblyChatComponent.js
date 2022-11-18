@@ -130,7 +130,7 @@ const AblyChatComponent = ({
           />
           <button css={ablyChatStyles.button} disabled={messageTextIsEmpty}>
             <Image
-              src="/../public/send-icon.png"
+              src="/send-icon.png"
               alt="send button"
               width={30}
               height={30}

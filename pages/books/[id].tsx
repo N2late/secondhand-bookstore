@@ -13,30 +13,12 @@ import { bookDetailsStyles } from '../../styles/books/bookDetails';
 import { BookWithUserLangConditionGenres } from '../../types/book';
 import { User } from '../../types/user';
 
-type Props =
-  | {
-      user: User;
-      book: BookWithUserLangConditionGenres;
-    }
-  | {
-      error: string;
-    };
+type Props = {
+  user: User;
+  book: BookWithUserLangConditionGenres;
+};
 
 export default function BookDetails(props: Props) {
-  if ('error' in props) {
-    return (
-      <div css={bookDetailsStyles.error}>
-        <Head>
-          <title>Book not found</title>
-          <meta name="description" content="Book not found" />
-        </Head>
-        <h1>{props.error}</h1>
-        <p>
-          Sorry, try search for it <Link href="/books/buy">here.</Link>
-        </p>
-      </div>
-    );
-  }
   const { user, book } = props;
   const router = useRouter();
   const { id } = router.query;
@@ -238,10 +220,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetch(`http://${domain}/api/books/${id}`);
   const bookJson = await data.json();
 
-  if (bookJson.message) {
+  if (bookJson.errors) {
     return {
       props: {
-        error: bookJson.message,
+        notFound: true,
       },
     };
   }

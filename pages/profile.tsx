@@ -18,7 +18,6 @@ type Props = {
   user: User;
   books: BookSmallPreview[];
   cloudinaryAPI: string;
-  refreshUserProfile: (arg: undefined) => void;
   setUser: (arg: undefined) => void;
 };
 
@@ -26,7 +25,6 @@ export default function Profile({
   user,
   books,
   cloudinaryAPI,
-  refreshUserProfile,
   setUser,
 }: Props) {
   const [editProfile, setEditProfile] = useState(false);
@@ -56,9 +54,12 @@ export default function Profile({
       setErrors(data.errors);
     } else {
       setErrors([]);
+      setProfilePicture(data.user.imgPath);
       setEditProfile(false);
     }
   };
+
+  console.log('user', user);
 
   const handleDelete = async () => {
     const res = await fetch(`/api/users/${user.username}`, {

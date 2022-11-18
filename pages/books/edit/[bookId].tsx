@@ -24,7 +24,6 @@ type Props = {
   languagesWithLabel: GroupBase<{ value: number; label: string }>[];
   bookConditionsWithLabel: GroupBase<{ value: number; label: string }>[];
   cloudinaryAPI: string;
-  user: User;
   book: string; // because it is passed as json string due to date values
 };
 
