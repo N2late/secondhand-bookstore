@@ -2,9 +2,7 @@ import _ from 'lodash';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   createMessage,
-  getConversationByConversationId,
   getConversationByConversationIdAndUserId,
-  getConversationByUserIdBookId,
 } from '../../../database/conversations';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { getUserBySessionToken } from '../../../database/users';

@@ -66,7 +66,7 @@ export default async function handler(
       return;
     }
 
-    res.status(200).json({ user: updatedUserInfo });
+    return res.status(200).json({ user: updatedUserInfo });
   } else if (req.method === 'DELETE') {
     const session = await getValidSessionByToken(req.cookies.sessionToken);
     if (!session) {
@@ -94,6 +94,8 @@ export default async function handler(
       },
     });
   } else {
-    res.status(405).json({ errors: [{ message: 'Method not allowed' }] });
+    return res
+      .status(405)
+      .json({ errors: [{ message: 'Method not allowed' }] });
   }
 }

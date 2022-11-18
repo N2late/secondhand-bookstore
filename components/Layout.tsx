@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-import { User, UserIdUsername } from '../types/user';
+import { UserIdUsername } from '../types/user';
 import Footer from './Footer';
 import Header from './Header';
 

@@ -114,7 +114,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const userConversations = await getConversationsByUserId(user.id);
 
-  if (!userConversations) {
+  if (_.size(userConversations) === 0) {
     return {
       props: {
         conversations: [],

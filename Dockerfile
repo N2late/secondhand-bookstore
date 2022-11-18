@@ -10,6 +10,7 @@ COPY . .
 ENV NODE_ENV production
 ENV FLY_IO_BUILD true
 RUN yarn install --frozen-lockfile
+ARG NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=diz1cgduk
 RUN yarn build
 
 # Initialize production layer
