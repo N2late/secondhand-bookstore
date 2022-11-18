@@ -6,7 +6,7 @@ This project was developed as a Final Project for the Upleveled BootCamp.
 ## Tech Stack
 
 - Next.js
--TypeScript
+- JS / TypeScript / React
 - PWA
 - REST API
 - PostgreSQL
@@ -42,12 +42,52 @@ This project was developed as a Final Project for the Upleveled BootCamp.
 
 ## Screenshots
 
-![App Homepage](https://www.awesomescreenshot.com/image/34522879?key=9f05ba0c222f5675cdc2a06e4e215e26)
+#### Home Page
+![App Homepage](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/Buy_book.png)
 
-![App Search](https://www.awesomescreenshot.com/image/34522923?key=287deacd568b44ea93c7d7c34a33a7d4)
+#### Search
+![App Search](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/Buy_book.png)
+
+#### Book details page
+![Book details](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/for_sell.png)
+
+#### Chat
+![Chat](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/Inbox_%20conversation.png)
+
+#### Profile
+![Profile](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/Profile.png)
+
+## Desgin Mockups in Figma
+![Figma](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/figma_ss_smaller.png)
+
+## Database Schema in DrawSQL
+![Database schema](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/db_schema_small.png)
 
 
+## Setup instructions
 
+Clone the repository and install all dependencies
+
+```bash
+git clone https://github.com/N2late/secondhand-bookstore.git
+cd secondhand-bookstore
+yarn
+```
+
+## Setup the database by downloading and installing PostgreSQL
+
+- Create a user and a database
+- Create a .env file. Check .env.example file to see what info should be provided
+- Copy the environment variables from .env-example into .env
+- Replace the placeholders xxxxx with your username, password and name of the database
+- Install dotenv-cli with yarn add dotenv-cli
+- Run the migrations with yarn migrate up
+- Start the server by running yarn dev
+
+## API Keys Dependencies
+
+- A cloudinary account for images upload. Add your cloudinary name to the env file.
+- A Ably account for the chat application. Add your Ably key to the env file.
 
 
 
