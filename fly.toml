@@ -12,7 +12,7 @@ processes = []
   PORT = "8080"
 
 [build.args]
-  NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="diz1cgduk"
+  NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME = "diz1cgduk"
 
 [experimental]
   allowed_public_ports = []
