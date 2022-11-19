@@ -1,4 +1,3 @@
-import { RowList } from 'postgres';
 import { ConversationInboxInfo, Message } from '../types/conversations';
 
 export function conversationsWithTimeFormatted(

@@ -1,4 +1,5 @@
 import { GetServerSidePropsContext } from 'next';
+import { CldImage } from 'next-cloudinary';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -36,6 +37,8 @@ export default function Profile({
 
   const router = useRouter();
 
+  console.log('profilePicture', profilePicture);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await fetch(`/api/users/${user.username}`, {
@@ -54,7 +57,7 @@ export default function Profile({
       setErrors(data.errors);
     } else {
       setErrors([]);
-      setProfilePicture(data.user.imgPath);
+
       setEditProfile(false);
     }
   };
@@ -89,8 +92,8 @@ export default function Profile({
             <h3>Personal Information</h3>
             <div css={profileStyles.profilePicContainer}>
               <div css={profileStyles.profilePic}>
-                <Image
-                  src={String(profilePicture)}
+                <CldImage
+                  src={String(profilePicture.slice(50))}
                   alt="Profile Picture"
                   width={100}
                   height={100}
