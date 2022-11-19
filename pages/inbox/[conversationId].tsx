@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { GetServerSidePropsContext } from 'next';
+import { CldImage } from 'next-cloudinary';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -82,8 +83,8 @@ export default function ConversationPage({
           <div css={conversationStyles.bookInfoAndChatContainer}>
             <div css={conversationStyles.bookInfoContainer}>
               <div css={conversationStyles.bookInfo}>
-                <Image
-                  src={book.imgPath}
+                <CldImage
+                  src={book.imgPath.slice(50)}
                   width={80}
                   height={120}
                   alt="book cover"

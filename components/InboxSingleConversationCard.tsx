@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
 import Link from 'next/link';
 import { inboxStyles } from '../styles/inbox';
 import { ConversationInboxInfo } from '../types/conversations';
@@ -14,8 +14,8 @@ function InboxSingleConversationCard({ conversation }: Props) {
         <div css={inboxStyles.conversationsBoxInner}>
           <input type="checkbox" />
           <div css={inboxStyles.conversationsBoxAvatar}>
-            <Image
-              src={conversation.imgPath}
+            <CldImage
+              src={conversation.imgPath.slice(50)}
               width={50}
               height={50}
               alt="avatar"

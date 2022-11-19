@@ -9,8 +9,8 @@ COPY . .
 # Set an environmental variable
 ENV NODE_ENV production
 ENV FLY_IO_BUILD true
+ENV NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME diz1cgduk
 RUN yarn install --frozen-lockfile
-ARG NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
 RUN yarn build
 
 # Initialize production layer
@@ -31,7 +31,7 @@ COPY --from=builder /app/package.json ./
 # Copy start script and make it executable
 COPY --from=builder /app/scripts ./scripts
 RUN chmod +x /app/scripts/fly-io-start.sh
-
+ENV NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME diz1cgduk
 ENV NODE_ENV production
 ENV PORT 8080
 

@@ -52,15 +52,17 @@ export default function Home({
         <div css={styles.sectionInnerContainerRecentAdded}>
           <div css={styles.recentlyAddedTitle}>
             <h3>Recently Added Books</h3>
-            <p>
-              View all{' '}
-              <Image
-                src="/chevron-right.png"
-                width={12}
-                height={12}
-                alt="view all icon"
-              />
-            </p>
+            <Link href="/books/buy?search=&genre=All&language=All&recentlyReleased=false%20%20%20%20%20%20%20%20&price=asc&recentlyAdded=desc">
+              <p>
+                View all{' '}
+                <Image
+                  src="/chevron-right.png"
+                  width={12}
+                  height={12}
+                  alt="view all icon"
+                />
+              </p>
+            </Link>
           </div>
           <div css={styles.bookContainer}>
             {recentlyAddedBooks.map((book: BookSmallPreview) => (

@@ -1,5 +1,6 @@
 // book details page
 
+import _ from 'lodash';
 import { GetServerSidePropsContext } from 'next';
 import { CldImage } from 'next-cloudinary';
 import Head from 'next/head';
@@ -8,6 +9,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import MessageBox from '../../components/MessageBox';
+import { getBookById } from '../../database/books';
 import { getUserBySessionToken } from '../../database/users';
 import { bookDetailsStyles } from '../../styles/books/bookDetails';
 import { BookWithUserLangConditionGenres } from '../../types/book';
@@ -34,8 +36,6 @@ export default function BookDetails(props: Props) {
     setLoading(false);
   }, [user.id, book.userId]);
 
-  console.log('img', book.imgPath);
-
   async function handleBookDelete() {
     const deleteBook = await fetch(`/api/books/${book.id}`, {
       method: 'DELETE',
@@ -49,8 +49,6 @@ export default function BookDetails(props: Props) {
       await router.push('/');
     }
   }
-
-  console.log('path', book.imgPath.slice(50));
 
   return (
     <>
@@ -213,25 +211,26 @@ export default function BookDetails(props: Props) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const token = context.req.cookies.sessionToken;
   const user = await getUserBySessionToken(token);
-  const domain = context.req.headers.host;
 
   const id = context.params?.id;
 
-  const data = await fetch(`http://${domain}/api/books/${id}`);
-  const bookJson = await data.json();
+  const bookObj = await getBookById(id as string);
 
-  if (bookJson.errors) {
+  if (_.size(bookObj) === 0) {
     return {
-      props: {
-        notFound: true,
-      },
+      notFound: true,
     };
   }
+
+  const book = bookObj[0];
+  book.genre = bookObj.map((b: any) => b.genre);
+  book.createdAt = JSON.stringify(book.createdAt);
+  book.releaseDate = JSON.stringify(book.releaseDate);
 
   return {
     props: {
       user: user || 'undefined',
-      book: bookJson,
+      book,
     },
   };
 }

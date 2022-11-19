@@ -15,8 +15,6 @@ export default async function handler(
   if (req.method === 'POST') {
     const session = await getValidSessionByToken(req.cookies.sessionToken);
 
-    console.log('I am here 1');
-
     /* This is checking if the user is logged in. If they are not, it will return an error. */
     if (!session) {
       return res.status(400).json({

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
 import { ChangeEvent, useState } from 'react';
 import { addBookStyles } from '../styles/books/addBook';
 import { imageUploadToCloudinary } from '../utilis/imageUpload';
@@ -50,7 +50,12 @@ function UploadImage({ setImgPath, imgPath, cloudinaryAPI }: Props) {
       </div>
       <div>
         {!!preview && (
-          <Image width={150} height={150} src={String(preview)} alt="preview" />
+          <CldImage
+            width={150}
+            height={150}
+            src={String(preview.slice(50))}
+            alt="preview"
+          />
         )}
       </div>
     </div>

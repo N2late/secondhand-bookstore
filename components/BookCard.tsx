@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
 import Link from 'next/link';
 import { styles } from '../styles/bookCard';
 import { BookSmallPreview } from '../types/book';
@@ -15,8 +15,8 @@ function BookCard(props: Props) {
     <div css={styles.bookCardContainer}>
       <div css={styles.bookInnerContainer}>
         <Link href={`/books/${book.id}`}>
-          <Image
-            src={imgPath}
+          <CldImage
+            src={book.imgPath.slice(50)}
             width={150}
             height={175}
             alt={`${title} book cover`}

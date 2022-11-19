@@ -5,6 +5,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import BookCard from '../../components/BookCard';
+import {
+  getBooks,
+  getBooksBySearch,
+  getBooksByTitleOrAuthorFromHeader,
+} from '../../database/books';
 import { getGenres } from '../../database/genres';
 import { getLanguages } from '../../database/languages';
 import { buyStyles } from '../../styles/books/buy';
@@ -183,13 +188,16 @@ export default function Buy({ genres, languages, books }: Props) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const query = context.query;
-  const domain = context.req.headers.host;
+
   const genres = await getGenres();
   const languages = await getLanguages();
 
   if (_.isEmpty(query)) {
-    const res = await fetch(`http://${domain}/api/books`);
-    const books = await res.json();
+    const books = await getBooks();
+    books.forEach((book) => {
+      book.createdAt = JSON.stringify(book.createdAt);
+      book.releaseDate = JSON.stringify(book.releaseDate);
+    });
     return {
       props: {
         genres,
@@ -199,17 +207,21 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   } else if (_.size(query) > 1) {
     const recentlyReleased = query.recentlyReleased as string;
-    const res = await fetch(
-      `http://${domain}/api/books/search?search=${query.search}&genre=${
-        query.genre
-      }&language=${
-        query.language
-      }&recentlyReleased=${recentlyReleased.trim()}&price=${
-        query.price
-      }&recentlyAdded=${query.recentlyAdded}`,
+
+    const books = await getBooksBySearch(
+      query.search as string,
+      query.genre as string,
+      query.language as string,
+      query.price as string,
+      query.recentlyAdded as string,
+      recentlyReleased.trim(),
     );
 
-    const { books } = await res.json();
+    books.forEach((book) => {
+      book.createdAt = JSON.stringify(book.createdAt);
+      book.releaseDate = JSON.stringify(book.releaseDate);
+    });
+
     return {
       props: {
         genres,
@@ -219,12 +231,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   } else if (query.search) {
     // get books that contain the query on title or author from the header search bar
-    const res = await fetch(
-      `http://${domain}/api/books/search?search=${query.search} `,
-      undefined,
+    const books = await getBooksByTitleOrAuthorFromHeader(
+      query.search as string,
     );
-
-    const books = await res.json();
     return {
       props: {
         genres,
