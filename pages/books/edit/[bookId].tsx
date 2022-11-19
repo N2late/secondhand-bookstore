@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Select, { GroupBase, MultiValue, SingleValue } from 'react-select';
-import { MonthYearPicker } from '../../../components/date-picker';
+import { MonthYearPicker } from '../../../components/Date-picker';
 import UploadImage from '../../../components/UploadImage';
 import { getBookConditions } from '../../../database/bookConditions';
 import { getAllBookInfoById } from '../../../database/books';
