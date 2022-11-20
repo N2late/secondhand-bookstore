@@ -66,4 +66,17 @@ export const styles = {
       transform: scale(0.9);
     }
   `,
+  createAccountLink: css`
+    padding-top: 20px;
+    color: #a8866e;
+    font-weight: 500;
+    font-size: 12px;
+    cursor: pointer;
+    a {
+      color: blue;
+      font-size: 16px;
+      font-weight: 400;
+      text-decoration: none;
+    }
+  `,
 };

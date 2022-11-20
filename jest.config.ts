@@ -7,9 +7,13 @@ const createJestConfig = nextJest({
 
 /** @type {import('jest').Config} */
 const config = {
-  testEnvironment: 'jest-environment-jsdom',
+  //testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['<rootDir>/playwright/'],
   moduleDirectories: ['node_modules', '<rootDir>/'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  preset: 'ts-jest',
 };
 
 export default createJestConfig(config);

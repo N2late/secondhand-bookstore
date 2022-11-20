@@ -51,7 +51,11 @@ export default function Buy({ genres, languages, books }: Props) {
         language: router.query.language as string,
         genre: router.query.genre as string,
       });
-      setRecentlyReleased(router.query.recentlyReleased as any);
+      const recentlyReleasedQueryValue = router.query
+        .recentlyReleased as string;
+      const recentlyReleasedBoolean =
+        recentlyReleasedQueryValue.trim() === 'true' ? true : false;
+      setRecentlyReleased(recentlyReleasedBoolean);
     } else {
       return setFilter({
         genre: 'All',

@@ -62,7 +62,7 @@ export const buyStyles = {
     input {
       margin-right: 10px;
     }
-    select :first-child {
+    select :first-of-type {
       margin-bottom: 8px;
     }
   `,
