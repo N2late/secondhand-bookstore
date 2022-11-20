@@ -31,7 +31,7 @@ export const useSearch = () => {
   return useContext(searchContext);
 };
 
-function useProvideSearch() {
+export function useProvideSearch() {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState({
     genre: 'All',

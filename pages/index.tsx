@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { MouseEventHandler } from 'react';
 import BookCard from '../components/BookCard';
 import {
   get4BooksByCreatedAt,

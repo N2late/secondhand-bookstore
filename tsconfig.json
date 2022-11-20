@@ -16,6 +16,12 @@
     "jsxImportSource": "@emotion/react",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/__document.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/__document.js",
+    "utilis/__tests__/search.test.js"
+  ],
   "exclude": ["node_modules"]
 }

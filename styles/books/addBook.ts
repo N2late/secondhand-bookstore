@@ -40,6 +40,13 @@ export const addBookStyles = {
     display: flex;
   `,
 
+  requiredField: css`
+    :after {
+      color: red;
+      content: '*';
+    }
+  `,
+
   formLeftSide: css`
     width: 50%;
     padding: 12px;

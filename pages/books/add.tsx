@@ -139,7 +139,9 @@ export default function AddBookForSell({
             <div css={addBookStyles.formGroup}>
               <div css={addBookStyles.formLeftSide}>
                 <div>
-                  <label htmlFor="title">Title</label>
+                  <label css={addBookStyles.requiredField} htmlFor="title">
+                    Title
+                  </label>
                   <input
                     id="title"
                     required
@@ -147,7 +149,9 @@ export default function AddBookForSell({
                   />
                 </div>
                 <div>
-                  <label htmlFor="author">Author</label>
+                  <label css={addBookStyles.requiredField} htmlFor="author">
+                    Author
+                  </label>
                   <input
                     id="author"
                     required
@@ -162,7 +166,9 @@ export default function AddBookForSell({
                   />
                 </div>
                 <div css={addBookStyles.languages}>
-                  <label htmlFor="language">Language</label>
+                  <label css={addBookStyles.requiredField} htmlFor="language">
+                    Language
+                  </label>
                   <Select
                     id="language"
                     options={languagesWithLabel}
@@ -170,7 +176,9 @@ export default function AddBookForSell({
                   />
                 </div>
                 <div>
-                  <label htmlFor="genre">Genre</label>
+                  <label css={addBookStyles.requiredField} htmlFor="genre">
+                    Genre
+                  </label>
                   <Select
                     defaultValue={undefined}
                     isMulti
@@ -183,7 +191,12 @@ export default function AddBookForSell({
                   />
                 </div>
                 <div>
-                  <label htmlFor="book condition">Book Condition</label>
+                  <label
+                    css={addBookStyles.requiredField}
+                    htmlFor="book condition"
+                  >
+                    Book Condition
+                  </label>
                   <Select
                     id="book condition"
                     options={bookConditionsWithLabel}
@@ -200,7 +213,9 @@ export default function AddBookForSell({
                   />
                 </div>
                 <div>
-                  <label htmlFor="price">Price (€)</label>
+                  <label css={addBookStyles.requiredField} htmlFor="price">
+                    Price (€)
+                  </label>
                   <input
                     type="number"
                     id="price"
@@ -252,6 +267,8 @@ export default function AddBookForSell({
                 <label htmlFor="reserved">Reserved</label>
               </div>
             </div>
+            <span css={addBookStyles.requiredField} />
+            <span>required field</span>
             <div css={addBookStyles.btnContainer}>
               <button css={addBookStyles.button}>Add book</button>
             </div>

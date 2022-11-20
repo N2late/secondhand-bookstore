@@ -31,9 +31,13 @@ function UploadImage({ setImgPath, imgPath, cloudinaryAPI }: Props) {
     <div css={addBookStyles.imageContainer}>
       <div>
         {imgPath ? (
-          <label htmlFor="file">Upload a new image</label>
+          <label css={addBookStyles.requiredField} htmlFor="file">
+            Upload a new image
+          </label>
         ) : (
-          <label htmlFor="file">Upload an image</label>
+          <label css={addBookStyles.requiredField} htmlFor="file">
+            Upload an image
+          </label>
         )}
         <input
           id="file"
@@ -53,7 +57,7 @@ function UploadImage({ setImgPath, imgPath, cloudinaryAPI }: Props) {
           <CldImage
             width={150}
             height={150}
-            src={String(preview.slice(50))}
+            src={String(preview)}
             alt="preview"
           />
         )}

@@ -94,7 +94,11 @@ function Login({ refreshUserProfile }: Props) {
 
           <br />
           <button css={styles.button}>Login</button>
+          <br />
         </form>
+        <p css={styles.createAccountLink}>
+          Don't have an account yet? <Link href="/signup">Create one now</Link>
+        </p>
       </div>
     </>
   );

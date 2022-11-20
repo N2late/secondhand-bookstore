@@ -17,6 +17,6 @@ describe('conversationsWithTimeFormatted', () => {
 
     const result = conversationsWithTimeFormatted(conversations);
 
-    expect(result[0].createdAt).toEqual('01/01/2021');
+    expect(result[0].createdAt).toEqual(' Jan 01 2021');
   });
 });

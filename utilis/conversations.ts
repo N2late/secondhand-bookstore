@@ -17,12 +17,20 @@ export function conversationsWithTimeFormatted(
         new Date(
           Date.parse(conversationInfo.createdAt as string),
         ).toDateString() === today
-          ? new Date(Date.parse(conversationInfo.createdAt as string))
-              .toLocaleTimeString()
-              .slice(0, 5)
-          : new Date(Date.parse(conversationInfo.createdAt as string))
-              .toDateString()
-              .slice(3),
+          ? new Date(
+              Date.parse(conversationInfo.createdAt as string),
+            ).toLocaleString('de-AT', {
+              hour12: false,
+              hour: '2-digit',
+              minute: '2-digit',
+            })
+          : new Date(
+              Date.parse(conversationInfo.createdAt as string),
+            ).toLocaleString('de-AT', {
+              year: 'numeric',
+              month: 'short',
+              day: '2-digit',
+            }),
     };
   });
   return conversationsResult;
@@ -44,12 +52,20 @@ export function conversationHistoryWithTimeFormatted(
           new Date(
             Date.parse(conversationHistoryInfo.createdAt as string),
           ).toDateString() === today
-            ? new Date(Date.parse(conversationHistoryInfo.createdAt as string))
-                .toLocaleTimeString()
-                .slice(0, 5)
-            : new Date(Date.parse(conversationHistoryInfo.createdAt as string))
-                .toDateString()
-                .slice(3),
+            ? new Date(
+                Date.parse(conversationHistoryInfo.createdAt as string),
+              ).toLocaleString('de-AT', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+              })
+            : new Date(
+                Date.parse(conversationHistoryInfo.createdAt as string),
+              ).toLocaleString('de-AT', {
+                year: 'numeric',
+                month: 'short',
+                day: '2-digit',
+              }),
       };
     },
   );
