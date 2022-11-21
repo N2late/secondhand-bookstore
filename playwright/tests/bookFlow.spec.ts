@@ -12,7 +12,7 @@ test('Add, Edit and Delete a book', async ({ page }) => {
   await page
     .getByRole('navigation')
     .getByRole('link', { name: 'Sell' })
-    .click();
+    .click({ timeout: 5000 });
   await expect(page).toHaveURL('http://localhost:3000/books/add', {
     timeout: 5000,
   });
