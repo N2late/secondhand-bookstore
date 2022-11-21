@@ -10,7 +10,7 @@ jobs:
       PGDATABASE: secondhand_bookstore
       PGUSERNAME: secondhand_bookstore
       PGPASSWORD: secondhand_bookstore
-      CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }
+      CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }}
       NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}
 
     steps:
