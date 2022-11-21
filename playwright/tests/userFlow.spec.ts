@@ -40,6 +40,11 @@ test('delete user', async ({ page }) => {
   await page.getByPlaceholder('email').press('Tab');
   await page.getByPlaceholder('password').fill('testpassword');
   await page.getByRole('button', { name: 'Login' }).click();
+  await Promise.all([
+    page.waitForResponse(
+      (res) => res.url().includes('api') && res.status() === 200,
+    ),
+  ]);
   await expect(page).toHaveURL('http://localhost:3000/', {
     timeout: 5000,
   });
