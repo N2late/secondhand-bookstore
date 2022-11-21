@@ -43,7 +43,7 @@ This project was developed as a Final Project for the Upleveled BootCamp.
 ## Screenshots
 
 #### Home Page
-![App Homepage](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/Buy_book.png)
+![App Homepage](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/Hand-me_%20secondhand%20bookstore.png)
 
 #### Search
 ![App Search](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/Buy_book.png)
