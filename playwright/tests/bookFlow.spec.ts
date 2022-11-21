@@ -31,16 +31,12 @@ test('Add, Edit and Delete a book', async ({ page }) => {
   await page.getByLabel('Title').fill('Test book');
   await page.getByLabel('Author').click();
   await page.getByLabel('Author').fill('test author');
-  await page.locator('.css-6j8wv5-Input').first().click();
+  await page.locator('#language svg').click();
+  await page.locator('#react-select-2-option-0').click();
+  await page.locator('#genre svg').click();
   await page.locator('#react-select-3-option-0').click();
-  await page.locator('.select__input-container').click();
-  await page.locator('#react-select-5-option-4').click();
-  await page
-    .locator(
-      '[id="book\\ condition"] > .css-1s2u09g-control > .css-319lph-ValueContainer > .css-6j8wv5-Input',
-    )
-    .click();
-  await page.locator('#react-select-7-option-1').click();
+  await page.locator('[id="book\\ condition"] svg').click();
+  await page.locator('#react-select-4-option-1').click();
   await page.getByPlaceholder('€').click();
   await page.getByPlaceholder('€').fill('10');
   await page.getByLabel('Shipping costs included').check();
@@ -72,10 +68,16 @@ test('Add, Edit and Delete a book', async ({ page }) => {
   /* Test Edit feature */
   await page.getByRole('button', { name: 'Edit book details' }).click();
   await page.getByRole('heading', { name: 'Edit your book details' }).click();
-  await page.locator('.css-6j8wv5-Input').first().click();
-  await page.locator('#react-select-9-option-1').click();
+  await page.locator('#language svg').isVisible();
+  await page.getByLabel('Title').click();
+  await page.getByLabel('Title').fill('Book 2');
   await page.getByRole('button', { name: 'Save changes' }).click();
-  await page.getByText('French').isVisible();
+  await Promise.all([
+    page.waitForResponse(
+      (res) => res.url().includes('api') && res.status() === 200,
+    ),
+  ]);
+
   /* Test Delete feature */
   await page.getByRole('button', { name: 'Delete book' }).click();
   page.once('dialog', (dialog) => {

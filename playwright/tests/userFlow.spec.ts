@@ -59,6 +59,5 @@ test('delete user', async ({ page }) => {
     console.log(`Dialog message: ${dialog.message()}`);
     dialog.dismiss().catch(() => {});
   });
-  await page.getByRole('button', { name: 'Yes' }).click({ timeout: 5000 });
   await page.getByRole('link', { name: 'Sign up' }).click();
 });
