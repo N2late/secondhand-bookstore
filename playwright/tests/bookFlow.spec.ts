@@ -17,6 +17,7 @@ test('Add, Edit and Delete a book', async ({ page }) => {
     timeout: 5000,
   });
 
+  /* Uploading a file to the cloudinary API. */
   await page.setInputFiles('input[type="file"]', 'public/books/book1.jpg');
 
   /* Waiting for the response from the cloudinary API. */
