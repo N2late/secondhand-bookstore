@@ -26,6 +26,8 @@ export default async function handler(
     const { title, author, bookConditionId, languageId, imgPath, price } =
       req.body.book;
 
+    console.log('image path', imgPath);
+
     const { genres } = req.body;
 
     /* This is checking if the user has filled out all the required fields. If they have not, it will return an error. */
