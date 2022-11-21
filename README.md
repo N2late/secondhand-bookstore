@@ -13,7 +13,7 @@ This project was developed as a Final Project for the Upleveled BootCamp.
 - Ley for migrations
 - Emotion
 - Jest for unit testing
-- Playwrright for E2E testing
+- Playwright for E2E testing
 - Cloudinary for images upload
 - Ably for the chat feature
 
