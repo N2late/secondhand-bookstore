@@ -40,9 +40,9 @@ test('delete user', async ({ page }) => {
   await page.getByPlaceholder('email').press('Tab');
   await page.getByPlaceholder('password').fill('testpassword');
   await page.getByRole('button', { name: 'Login' }).click();
-  await page.getByRole('link', { name: 'profile' }).click();
+  await page.getByRole('link', { name: 'profile' }).click({ timeout: 5000 });
   await page.getByRole('button', { name: 'trashDelete Profile' }).click();
-  await page.getByRole('button', { name: 'Yes' }).click();
+  await page.getByRole('button', { name: 'Yes' }).click({ timeout: 5000 });
   page.once('dialog', (dialog) => {
     console.log(`Dialog message: ${dialog.message()}`);
     dialog.dismiss().catch(() => {});
