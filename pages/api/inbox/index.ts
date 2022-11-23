@@ -6,27 +6,27 @@ import {
 } from '../../../database/conversations';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { getUserBySessionToken } from '../../../database/users';
+import { deleteConversations } from '../../../utilis/deleteConversations';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  const session = await getValidSessionByToken(req.cookies.sessionToken);
+
+  if (!session) {
+    res.status(400).json({ errors: [{ message: 'Session is invalid' }] });
+    return;
+  }
+
+  const user = await getUserBySessionToken(session.token);
+
+  if (!user) {
+    res.status(400).json({ errors: [{ message: 'Session token not valid' }] });
+    return;
+  }
+
   if (req.method === 'POST') {
-    const session = await getValidSessionByToken(req.cookies.sessionToken);
-    if (!session) {
-      res.status(400).json({ errors: [{ message: 'Session is invalid' }] });
-      return;
-    }
-
-    const user = await getUserBySessionToken(session.token);
-
-    if (!user) {
-      res
-        .status(400)
-        .json({ errors: [{ message: 'Session token not valid' }] });
-      return;
-    }
-
     const { sellerId, buyerId, bookId, messageBody } = req.body;
 
     /* Checking if the conversation exists. */
@@ -71,6 +71,9 @@ export default async function handler(
       return;
     }
     res.status(200).json({ conversation: conversation, message: message });
+  } else if (req.method === 'DELETE') {
+    const result = await deleteConversations(req.body.conversationIds, user.id);
+    res.status(200).json(result);
   } else {
     res.status(405).json({ errors: [{ message: 'Method not allowed' }] });
   }

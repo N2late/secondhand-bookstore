@@ -5,14 +5,33 @@ import { ConversationInboxInfo } from '../types/conversations';
 
 type Props = {
   conversation: ConversationInboxInfo;
+  setDeleteConversationId: (prev: any) => (string | number)[];
 };
 
-function InboxSingleConversationCard({ conversation }: Props) {
+function InboxSingleConversationCard({
+  conversation,
+  setDeleteConversationId,
+}: Props) {
+  /**
+   * If the checkbox is checked, add the conversation id to the array of ids to delete. If the checkbox
+   * is unchecked, remove the conversation id from the array of ids to delete.
+   * @param e - React.ChangeEvent<HTMLInputElement>
+   */
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (e.target.checked) {
+      setDeleteConversationId((prev: string[]) => [...prev, conversation.id]);
+    } else {
+      setDeleteConversationId((prev: string[]) =>
+        prev.filter((id: any) => id !== conversation.id),
+      );
+    }
+  }
+
   return (
-    <Link href={`/inbox/${conversation.id}`} css={inboxStyles.link}>
-      <div css={inboxStyles.conversationsBox}>
-        <div css={inboxStyles.conversationsBoxInner}>
-          <input type="checkbox" />
+    <div css={inboxStyles.conversationsBox}>
+      <div css={inboxStyles.conversationsBoxInner}>
+        <input type="checkbox" onChange={handleChange} />
+        <Link href={`/inbox/${conversation.id}`} css={inboxStyles.link}>
           <div css={inboxStyles.conversationsBoxAvatar}>
             <CldImage
               src={conversation.imgPath.slice(50)}
@@ -21,18 +40,20 @@ function InboxSingleConversationCard({ conversation }: Props) {
               alt="avatar"
             />
           </div>
-          <p>{conversation.username}</p>
-        </div>
+        </Link>
+        <p>{conversation.username}</p>
+      </div>
+      <Link href={`/inbox/${conversation.id}`} css={inboxStyles.link}>
         <div>
           <p>
             Subject: <strong>{conversation.bookTitle}</strong>
           </p>
         </div>
-        <div>
-          <p>{conversation.createdAt as string}</p>
-        </div>
+      </Link>
+      <div>
+        <p>{conversation.createdAt as string}</p>
       </div>
-    </Link>
+    </div>
   );
 }
 

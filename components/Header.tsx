@@ -83,14 +83,14 @@ function Header({ user }: Props) {
             ) : (
               <>
                 <li css={styles.navItem}>
-                  <Link href="/inbox">
+                  <Anchor href="/inbox">
                     <Image
                       src="/email_icon.png"
                       alt="inbox"
                       width={20}
                       height={20}
                     />
-                  </Link>
+                  </Anchor>
                 </li>
                 <li css={styles.navItem}>
                   <Link href="/profile">

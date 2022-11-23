@@ -15,7 +15,7 @@ export const ablyChatStyles = {
 
   chatText: css`
     height: 80%;
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 600px) {
       width: 100%;
     }
     display: flex;
@@ -67,7 +67,8 @@ export const ablyChatStyles = {
       display: flex;
       flex-direction: column;
       font-size: 16px;
-      width: 13em;
+      width: 33%;
+      height: fit-content;
       background: ${me ? '#92969A' : '#F8FAFD'};
       color: ${me ? '#fff' : '#1D232E'};
       padding: 0.8em;
@@ -78,18 +79,21 @@ export const ablyChatStyles = {
       margin-left: ${me ? '7.5em' : 'auto'};
       margin-right: ${me ? 'auto' : '8em'};
       @media screen and (min-device-width: 600px) and (max-device-width: 900px) {
-        margin-left: ${me ? '22em' : 'auto'};
-        margin-right: ${me ? 'auto' : '22em'};
+        margin-left: ${me ? '50%' : 'auto'};
+        margin-right: ${me ? 'auto' : '50%'};
+        width: 50%;
       }
       @media screen and (min-width: 900px) {
-        margin-left: ${me ? '7.5em' : 'auto'};
-        margin-right: ${me ? 'auto' : '8em'};
+        margin-left: ${me ? '60%' : 'auto'};
+        margin-right: ${me ? 'auto' : '60%'};
+        width: 40%;
       }
       @media screen and (max-width: 600px) {
-        margin-left: ${me ? '70%' : 'auto'};
-        margin-right: ${me ? 'auto' : '70%'};
+        margin-left: ${me ? '60%' : 'auto'};
+        margin-right: ${me ? 'auto' : '60%'};
+        width: 40%;
       }
-      inline-size: 13em;
+
       line-break: strict;
       overflow-wrap: break-word;
     `,
