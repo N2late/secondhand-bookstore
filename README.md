@@ -57,7 +57,7 @@ This project was developed as a Final Project for the Upleveled BootCamp.
 #### Profile
 ![Profile](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/Profile.png)
 
-## Desgin Mockups in Figma
+## Design Mockups in Figma
 ![Figma](https://raw.githubusercontent.com/N2late/secondhand-bookstore/main/public/figma_ss_smaller.png)
 
 ## Database Schema in DrawSQL
