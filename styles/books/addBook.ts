@@ -7,6 +7,10 @@ export const addBookStyles = {
     width: 95%;
     height: fit-content;
 
+    @media screen and (max-width: 600px) {
+      margin-top: 270px;
+    }
+
     h1 {
       font-size: 28px;
       font-weight: 800;
@@ -38,6 +42,11 @@ export const addBookStyles = {
   formGroup: css`
     width: 100%;
     display: flex;
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+      justify-content: center;
+      height: 500px;
+    }
   `,
 
   requiredField: css`
@@ -49,6 +58,9 @@ export const addBookStyles = {
 
   formLeftSide: css`
     width: 50%;
+    @media screen and (max-width: 600px) {
+      width: 100%;
+    }
     padding: 12px;
     display: flex;
     gap: 18px;
@@ -96,6 +108,10 @@ export const addBookStyles = {
     display: flex;
     flex-direction: column;
     width: 50%;
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      margin-top: 12px;
+    }
     padding: 12px;
     justify-content: center;
     textarea {
@@ -120,11 +136,17 @@ export const addBookStyles = {
       flex-direction: column;
       padding-right: 8px;
     }
+    @media screen and (max-width: 600px) {
+      margin-top: 12px;
+    }
   `,
 
   finalDetails: css`
     margin-top: 20px;
     width: 75%;
+    @media screen and (max-width: 600px) {
+      width: 100%;
+    }
     display: flex;
     gap: 12px;
     flex-wrap: wrap;

@@ -50,7 +50,7 @@ export default function ConversationPage({
   return (
     <>
       <Head>
-        <title>Inbox: conversation</title>
+        <title>Hand me - Your Secondhand Bookstore</title>
         <meta name="conversation" content="conversation with a user" />
       </Head>
       <main>

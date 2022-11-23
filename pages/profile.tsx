@@ -82,7 +82,7 @@ export default function Profile({
   return (
     <>
       <Head>
-        <title>Profile</title>
+        <title>Hand me - Your Secondhand Bookstore</title>
         <meta name="description" content="User private profile" />
       </Head>
       <main>
@@ -153,7 +153,7 @@ export default function Profile({
             {errors.map((error) => {
               return (
                 <p css={styles.error} key={error.message}>
-                  !Error: {error.message}
+                  {error.message}
                 </p>
               );
             })}

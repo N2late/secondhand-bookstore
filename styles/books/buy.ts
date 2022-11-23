@@ -6,6 +6,11 @@ export const buyStyles = {
     margin-top: 125px;
     width: 95%;
     height: 220px;
+    @media screen and (max-width: 600px) {
+      margin-top: 240px;
+      width: 90%;
+      height: 230px;
+    }
   `,
   searchBar: css`
     margin: 0 auto;

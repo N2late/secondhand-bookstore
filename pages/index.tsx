@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MouseEventHandler } from 'react';
 import BookCard from '../components/BookCard';
 import {
   get4BooksByCreatedAt,
@@ -9,7 +8,6 @@ import {
 } from '../database/books';
 import { styles } from '../styles/home';
 import { BookSmallPreview } from '../types/book';
-import { useSearch } from '../utilis/search';
 
 type Props = {
   recentlyAddedBooks: BookSmallPreview[];
@@ -20,11 +18,10 @@ export default function Home({
   recentlyAddedBooks,
   recentlyReleasedBooks,
 }: Props) {
-  const { setRecentlyReleased } = useSearch();
   return (
     <>
       <Head>
-        <title>Hand-me: secondhand bookstore</title>
+        <title>Hand me - Your Secondhand Bookstore</title>
         <meta name="description" content="Buy and sell used books" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

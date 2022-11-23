@@ -22,6 +22,11 @@ export const bookDetailsStyles = {
     margin-top: 100px;
     width: 95%;
     height: fit-content;
+    @media screen and (max-width: 600px) {
+      margin-top: 250px;
+      width: 90%;
+      min-height: 100vh;
+    }
   `,
   locationFlow: css`
     padding-top: 20px;
@@ -41,7 +46,9 @@ export const bookDetailsStyles = {
   bookDetailsContainer: css`
     width: 100%;
     display: flex;
-    margin-top: 24px; ;
+    margin-top: 24px;
+    @media screen and (max-width: 600px) {
+    }
   `,
 
   bookCover: css`
@@ -62,6 +69,9 @@ export const bookDetailsStyles = {
     position: relative !important;
     height: unset !important;
     max-height: 500px;
+    @media screen and (max-width: 600px) {
+      width: 300px !important;
+    }
   `,
 
   bookInfo: css`

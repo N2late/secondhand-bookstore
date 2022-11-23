@@ -82,8 +82,12 @@ export const ablyChatStyles = {
         margin-right: ${me ? 'auto' : '22em'};
       }
       @media screen and (min-width: 900px) {
-        align-self: ${me ? 'end' : 'start'};
-        margin-right: ${me ? '0%' : '90%'};
+        margin-left: ${me ? '7.5em' : 'auto'};
+        margin-right: ${me ? 'auto' : '8em'};
+      }
+      @media screen and (max-width: 600px) {
+        margin-left: ${me ? '70%' : 'auto'};
+        margin-right: ${me ? 'auto' : '70%'};
       }
       inline-size: 13em;
       line-break: strict;

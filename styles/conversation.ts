@@ -12,6 +12,9 @@ export const conversationStyles = {
       color: #a8866e;
       padding: 8px;
     }
+    @media screen and (max-width: 600px) {
+      margin-top: 270px;
+    }
   `,
   locationFlow: css`
     display: flex;
@@ -31,10 +34,18 @@ export const conversationStyles = {
     width: 95%;
     padding: 20px;
     display: flex;
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+      justify-content: center;
+    }
   `,
   bookInfo: css`
     display: flex;
     width: 30%;
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      margin-bottom: 50px;
+    }
     img {
       border-radius: 8px;
     }
@@ -56,6 +67,9 @@ export const conversationStyles = {
   `,
   ablyContainer: css`
     width: 60%;
+    @media screen and (max-width: 600px) {
+      width: 100%;
+    }
     padding: 20px;
     border-radius: 8px;
     border: 2px solid #e6e6e6;

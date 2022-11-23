@@ -114,7 +114,8 @@ export const profileStyles = {
       color: #a8866e;
     }
     div {
-      width: 330px;
+      min-width: 350px;
+      max-width: fit-content;
       display: flex;
       margin-bottom: 12px;
       align-items: center;
@@ -124,7 +125,8 @@ export const profileStyles = {
 
   userTextInfo: css`
     margin-left: 12px;
-    width: 200px;
+    min-width: 200px;
+    max-width: fit-content;
     height: 30px;
     padding: 4px 8px 4px 8px;
     background: #f1f1f1;

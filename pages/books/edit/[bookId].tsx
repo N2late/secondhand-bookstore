@@ -133,7 +133,7 @@ export default function EditBook({
   return (
     <>
       <Head>
-        <title>Edit your book details</title>
+        <title>Hand me - Your Secondhand Bookstore</title>
         <meta name="description" content="Edit the details of your book" />
       </Head>
       <main>
@@ -156,7 +156,7 @@ export default function EditBook({
             {errors.map((error) => {
               return (
                 <p css={styles.error} key={error.message}>
-                  !Error: {error.message}
+                  {error.message}
                 </p>
               );
             })}

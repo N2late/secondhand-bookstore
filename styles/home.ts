@@ -6,6 +6,10 @@ export const styles = {
     margin-top: 100px;
     width: 80%;
     height: 220px;
+    @media screen and (max-width: 600px) {
+      margin-top: 220px;
+      width: 90%;
+    }
   `,
   heroInnerContainer: css`
     width: 100%;
@@ -18,6 +22,11 @@ export const styles = {
     display: flex;
     align-items: center;
     text-align: center;
+    @media screen and (max-width: 600px) {
+      height: 240px;
+      background-position: 100% 50%;
+      background-size: 100%;
+    }
   `,
   heroLogo: css`
     width: 75%;
@@ -41,6 +50,12 @@ export const styles = {
         margin-top: -10px;
       }
     }
+    @media screen and (max-width: 600px) {
+      h2 {
+        margin-top: 0;
+        font-size: 20px;
+      }
+    }
   `,
   btnContainer: css`
     display: flex;
@@ -49,6 +64,9 @@ export const styles = {
     gap: 20px;
     @media screen and (max-width: 900px) {
       margin-top: 8px;
+    }
+    @media screen and (max-width: 600px) {
+      margin-top: 30px;
     }
   `,
   heroButton: css`

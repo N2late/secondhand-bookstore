@@ -7,6 +7,11 @@ export const styles = {
     margin: 0 auto;
     margin-top: 2%;
     text-align: center;
+    @media screen and (max-width: 600px) {
+      margin-top: 200px;
+      width: 60%;
+      height: 300px;
+    }
 
     h1 {
       margin-top: 24px;
@@ -20,6 +25,10 @@ export const styles = {
       font-weight: 700;
       font-size: 1.1rem;
       color: #a8866e;
+      @media screen and (max-width: 600px) {
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
     }
   `,
   form: css``,
@@ -35,6 +44,10 @@ export const styles = {
     font-weight: 500;
     font-size: 14px;
     border-radius: 4px;
+    @media screen and (max-width: 600px) {
+      margin-bottom: 30px;
+      margin-top: 20px;
+    }
   `,
   error: css`
     color: red !important;
@@ -57,6 +70,9 @@ export const styles = {
     flex-grow: 0;
     font-size: 18px;
     cursor: pointer;
+    @media screen and (max-width: 600px) {
+      margin-top: 30px;
+    }
 
     :hover {
       background: #f8ede3;
