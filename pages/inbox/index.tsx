@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Anchor } from '../../components/Header';
 import InboxSingleConversationCard from '../../components/InboxSingleConversationCard';
 import {
   getBuyerConversationsWithUserImgPathUsernameBookTitleLastMessageTimeByConversationId,
@@ -24,12 +25,45 @@ type Props = {
 };
 
 export default function Inbox({ conversations }: Props) {
-  const { sellerConversations, buyerConversations } = conversations;
+  let { sellerConversations, buyerConversations } = conversations;
+  const [sellerConversationsState, setSellerConversationsState] =
+    useState(sellerConversations);
+  const [buyerConversationsState, setBuyerConversationsState] =
+    useState(buyerConversations);
   const [selectedTypeOfConversation, setSelectedTypeOfConversation] =
     useState('buyer');
   const [deleteConversationId, setDeleteConversationId] = useState([]);
 
-  console.log('buyerConversations', buyerConversations);
+  async function handleDeleteConversations() {
+    const res = await fetch('/api/inbox', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        conversationIds: deleteConversationId,
+      }),
+    });
+    if (res.ok) {
+      const conversationsDeleted = await res.json();
+
+      const newSellerConversations = sellerConversationsState.filter(
+        (conversation) => !conversationsDeleted.includes(conversation.id),
+      );
+      const newBuyerConversations = buyerConversationsState.filter(
+        (conversation) => !conversationsDeleted.includes(conversation.id),
+      );
+      setSellerConversationsState(newSellerConversations);
+      setBuyerConversationsState(newBuyerConversations);
+      buyerConversations = newBuyerConversations;
+      sellerConversations = newSellerConversations;
+
+      setDeleteConversationId([]);
+    } else {
+      console.log('error deleting conversations');
+    }
+  }
+
   return (
     <>
       <Head>
@@ -76,27 +110,43 @@ export default function Inbox({ conversations }: Props) {
               </button>
             </div>
             <div css={inboxStyles.conversationsInnerContainer}>
-              <button css={inboxStyles.deleteConversationsButton}>
+              <button
+                css={inboxStyles.deleteConversationsButton}
+                onClick={handleDeleteConversations}
+              >
                 Delete selected messages
               </button>
+
               {selectedTypeOfConversation === 'buyer' ? (
-                _.size(buyerConversations) === 0 ? (
+                _.size(buyerConversations) === 0 ||
+                buyerConversationsState.length === 0 ? (
                   <p>You don't have any conversations ongoing as a buyer</p>
                 ) : (
-                  buyerConversations.map((conversation) => (
+                  buyerConversationsState.map((conversation) => (
                     <InboxSingleConversationCard
                       key={conversation.id}
                       conversation={conversation}
+                      setDeleteConversationId={
+                        setDeleteConversationId as (
+                          prev: any,
+                        ) => (string | number)[]
+                      }
                     />
                   ))
                 )
-              ) : _.size(sellerConversations) === 0 ? (
+              ) : _.size(sellerConversations) === 0 ||
+                sellerConversationsState.length === 0 ? (
                 <p>You don't have any conversations ongoing as a seller</p>
               ) : (
-                sellerConversations.map((conversation) => (
+                sellerConversationsState.map((conversation) => (
                   <InboxSingleConversationCard
                     key={conversation.id}
                     conversation={conversation}
+                    setDeleteConversationId={
+                      setDeleteConversationId as (
+                        prev: any,
+                      ) => (string | number)[]
+                    }
                   />
                 ))
               )}
@@ -131,8 +181,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  console.log(userConversations);
-
   let buyerConversations = await Promise.all(
     userConversations.map(async (conversation) => {
       if (conversation.sellerId === user.id) {
@@ -148,7 +196,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   buyerConversations = buyerConversations.filter((conv) => conv !== undefined);
 
-  console.log('buyer', buyerConversations);
   // sort buyerConversations by createdAt descending
 
   buyerConversations = buyerConversations.sort((a, b) => {

@@ -136,3 +136,11 @@ export async function getMessagesByConversationId(conversationId: number) {
   `;
   return messages as Message[];
 }
+
+export async function deleteConversation(conversationId: number) {
+  const deletedConversation = await sql`
+    DELETE FROM conversations
+    WHERE id = ${conversationId}
+  `;
+  return deletedConversation;
+}
