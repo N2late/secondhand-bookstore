@@ -9,13 +9,27 @@ function Footer() {
         <div>
           <h3>Search by Popular Genres</h3>
           <ul>
-            <li>Classics</li>
-            <li>Romance</li>
-            <li>Fiction</li>
-            <li>Non-Fiction</li>
-            <li>Fantasy</li>
-            <li>Young Adult</li>
-            <li>Children's</li>
+            <Link href="http://localhost:3000/books/buy?search=&genre=26&language=All&recentlyReleased=false%20%20%20%20%20%20%20%20&price=asc&recentlyAdded=asc">
+              <li>Action </li>
+            </Link>
+            <Link href="http://localhost:3000/books/buy?search=&genre=30&language=All&recentlyReleased=false%20%20%20%20%20%20%20%20&price=asc&recentlyAdded=asc">
+              <li> Drama</li>
+            </Link>
+            <Link href="http://localhost:3000/books/buy?search=&genre=31&language=All&recentlyReleased=false%20%20%20%20%20%20%20%20&price=asc&recentlyAdded=asc">
+              <li>Fantasy</li>
+            </Link>
+            <Link href="http://localhost:3000/books/buy?search=&genre=32&language=All&recentlyReleased=false%20%20%20%20%20%20%20%20&price=asc&recentlyAdded=asc">
+              <li>Historical</li>
+            </Link>
+            <Link href="http://localhost:3000/books/buy?search=&genre=47&language=All&recentlyReleased=false%20%20%20%20%20%20%20%20&price=asc&recentlyAdded=asc">
+              <li>Memoir</li>
+            </Link>
+            <Link href="http://localhost:3000/books/buy?search=&genre=50&language=All&recentlyReleased=false%20%20%20%20%20%20%20%20&price=asc&recentlyAdded=asc">
+              <li>Non-Fiction</li>
+            </Link>
+            <Link href="http://localhost:3000/books/buy?search=&genre=36&language=All&recentlyReleased=false%20%20%20%20%20%20%20%20&price=asc&recentlyAdded=asc">
+              <li>Romance</li>
+            </Link>
           </ul>
         </div>
         <div>

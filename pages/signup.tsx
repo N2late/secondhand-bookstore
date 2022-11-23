@@ -57,7 +57,7 @@ function SignUp({ refreshUserProfile }: Props) {
   return (
     <>
       <Head>
-        <title>Sign up</title>
+        <title>Hand me - Your Secondhand Bookstore</title>
         <meta
           name="description"
           content="Sing up into Hand-me secondhand bookstore account"
@@ -72,7 +72,7 @@ function SignUp({ refreshUserProfile }: Props) {
         {errors.map((error) => {
           return (
             <p css={styles.error} key={error.message}>
-              Error: {error.message}
+              {error.message}
             </p>
           );
         })}
@@ -84,7 +84,7 @@ function SignUp({ refreshUserProfile }: Props) {
               setErrors([
                 {
                   message:
-                    'You need to accept our Privacy Policy  in order to create an account',
+                    'You need to agree to the terms and conditions in order to create an account',
                 },
               ]);
               return;
@@ -142,6 +142,9 @@ function SignUp({ refreshUserProfile }: Props) {
           <br />
           <button css={styles.button}>Sign up</button>
         </form>
+        <p css={styles.createAccountLink}>
+          Already have an account? <Link href="/login">Login </Link>
+        </p>
       </div>
     </>
   );

@@ -41,13 +41,18 @@ export default function App({ Component, pageProps }: AppProps) {
             padding: 0;
             text-decoration: none;
           }
+          html,
           body {
             font-family: 'Nunito', sans-serif;
             font-size: 16px;
             line-height: 1.4;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            @media screen and (max-width: 600px) {
+              position: absolute;
+              min-height: 100vh;
+            }
           }
         `}
       />

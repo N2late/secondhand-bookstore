@@ -56,7 +56,7 @@ function Login({ refreshUserProfile }: Props) {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Hand me - Your Secondhand Bookstore</title>
         <meta name="description" content="Login new users" />
       </Head>
       <div css={styles.container}>

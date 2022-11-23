@@ -5,7 +5,13 @@ import Footer from './Footer';
 import Header from './Header';
 
 const contentWrap = css`
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
   padding-bottom: 50px;
+  @media screen and (max-width: 600px) {
+    min-height: 1220px;
+  }
 `;
 
 type Props = {

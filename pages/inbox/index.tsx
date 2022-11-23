@@ -29,10 +29,11 @@ export default function Inbox({ conversations }: Props) {
     useState('buyer');
   const [deleteConversationId, setDeleteConversationId] = useState([]);
 
+  console.log('buyerConversations', buyerConversations);
   return (
     <>
       <Head>
-        <title>Inbox</title>
+        <title>Hand me - Your Secondhand Bookstore</title>
         <meta name="description" content="inbox" />
       </Head>
       <main>
@@ -78,19 +79,27 @@ export default function Inbox({ conversations }: Props) {
               <button css={inboxStyles.deleteConversationsButton}>
                 Delete selected messages
               </button>
-              {selectedTypeOfConversation === 'buyer'
-                ? buyerConversations.map((conversation) => (
+              {selectedTypeOfConversation === 'buyer' ? (
+                _.size(buyerConversations) === 0 ? (
+                  <p>You don't have any conversations ongoing as a buyer</p>
+                ) : (
+                  buyerConversations.map((conversation) => (
                     <InboxSingleConversationCard
                       key={conversation.id}
                       conversation={conversation}
                     />
                   ))
-                : sellerConversations.map((conversation) => (
-                    <InboxSingleConversationCard
-                      key={conversation.id}
-                      conversation={conversation}
-                    />
-                  ))}
+                )
+              ) : _.size(sellerConversations) === 0 ? (
+                <p>You don't have any conversations ongoing as a seller</p>
+              ) : (
+                sellerConversations.map((conversation) => (
+                  <InboxSingleConversationCard
+                    key={conversation.id}
+                    conversation={conversation}
+                  />
+                ))
+              )}
             </div>
           </div>
         </div>
@@ -122,6 +131,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
+  console.log(userConversations);
+
   let buyerConversations = await Promise.all(
     userConversations.map(async (conversation) => {
       if (conversation.sellerId === user.id) {
@@ -137,6 +148,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   buyerConversations = buyerConversations.filter((conv) => conv !== undefined);
 
+  console.log('buyer', buyerConversations);
   // sort buyerConversations by createdAt descending
 
   buyerConversations = buyerConversations.sort((a, b) => {

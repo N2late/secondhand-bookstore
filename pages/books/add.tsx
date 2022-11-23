@@ -132,7 +132,7 @@ export default function AddBookForSell({
             {errors.map((error) => {
               return (
                 <p css={styles.error} key={error.message}>
-                  !Error: {error.message}
+                  {error.message}
                 </p>
               );
             })}

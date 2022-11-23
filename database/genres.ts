@@ -4,6 +4,7 @@ import { sql } from './connect';
 export async function getGenres() {
   const genres = await sql<Genre[]>`
     SELECT id, type FROM genres
+    ORDER BY type ASC
   `;
 
   return genres;
