@@ -19,6 +19,6 @@ export async function imageUploadToCloudinary(
       body: formData,
     },
   ).then((res) => res.json());
-  console.log('data', data);
+
   return data.secure_url;
 }

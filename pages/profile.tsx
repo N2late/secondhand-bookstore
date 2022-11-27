@@ -37,8 +37,6 @@ export default function Profile({
 
   const router = useRouter();
 
-  console.log('profilePicture', profilePicture);
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await fetch(`/api/users/${user.username}`, {
@@ -61,8 +59,6 @@ export default function Profile({
       setEditProfile(false);
     }
   };
-
-  console.log('user', user);
 
   const handleDelete = async () => {
     const res = await fetch(`/api/users/${user.username}`, {

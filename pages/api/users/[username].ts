@@ -61,8 +61,6 @@ export default async function handler(
       req.body.imgPath,
     );
 
-    console.log('api', updatedUserInfo);
-
     if (_.size(updatedUserInfo) === 0) {
       res.status(400).json({ errors: [{ message: 'User not updated' }] });
       return;

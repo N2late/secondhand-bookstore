@@ -1,6 +1,12 @@
 import Ably from 'ably/promises';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+/**
+ * It creates a new Ably client, creates a token request, and returns the token request data
+ * @param {NextApiRequest} req - NextApiRequest - the request object
+ * @param {NextApiResponse} res - NextApiResponse - The response object that you can use to send a
+ * response back to the client.
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,

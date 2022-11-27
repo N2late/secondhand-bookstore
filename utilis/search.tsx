@@ -31,6 +31,23 @@ export const useSearch = () => {
   return useContext(searchContext);
 };
 
+/**
+ * It's a hook that provides the state and functions for the search bar.
+ * @returns An object with the following properties:
+ * search,
+ * filter,
+ * sort,
+ * setSearch,
+ * handleSearchOnKeyPress,
+ * handleFilter,
+ * handleOnChangeSearch,
+ * handleSort,
+ * handleOnSubmit,
+ * handleCheckbox,
+ * setFilter,
+ * recentlyReleased,
+ * setRecentlyReleased,
+ */
 export function useProvideSearch() {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState({

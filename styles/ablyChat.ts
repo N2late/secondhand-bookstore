@@ -62,6 +62,7 @@ export const ablyChatStyles = {
     margin-bottom: 12px;
   `,
 
+  /* A function that returns a css object. Takes one arg which can be either the user (with the session token - "me") or the user that is the recipient  */
   messageTextStyle: (me: boolean) =>
     css`
       display: flex;

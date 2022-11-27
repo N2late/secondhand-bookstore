@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Anchor } from '../../components/Header';
 import InboxSingleConversationCard from '../../components/InboxSingleConversationCard';
 import {
   getBuyerConversationsWithUserImgPathUsernameBookTitleLastMessageTimeByConversationId,
@@ -181,6 +180,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
+  /* Mapping over the userConversations array and returning a new array with the
+  Conversations as buyer with User ImgPath Username Book Title and LastMessageTime. */
   let buyerConversations = await Promise.all(
     userConversations.map(async (conversation) => {
       if (conversation.sellerId === user.id) {
@@ -194,6 +195,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     }),
   );
 
+  /* Filtering out the undefined values from the array. */
   buyerConversations = buyerConversations.filter((conv) => conv !== undefined);
 
   // sort buyerConversations by createdAt descending
@@ -204,6 +206,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       new Date(a?.createdAt as Date).getTime()
     );
   });
+
+  // Mapping over the userConversations array and returning a new array with the
+  // Conversations as seller with User ImgPath Username Book Title and LastMessageTime.
 
   let sellerConversations = await Promise.all(
     userConversations.map(async (conversation) => {
@@ -218,15 +223,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     }),
   );
 
+  /* Filtering out the undefined values from the array. */
   sellerConversations = sellerConversations.filter(
     (conv) => conv !== undefined,
   );
 
-  sellerConversations = sellerConversations.filter(
-    (conv) => conv !== undefined,
-  );
-
-  // sort buyerConversations by createdAt descending
+  // sort sellerConversations by createdAt descending
 
   sellerConversations = sellerConversations.sort((a, b) => {
     return (
@@ -235,6 +237,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     );
   });
 
+  /* Checking if the first element of the array is not undefined. If it is not undefined, it will
+  return the array with the time formatted for each conversation. If it is undefined, it will return an empty array. */
   if (_.size(sellerConversations[0])) {
     sellerConversations = conversationsWithTimeFormatted(
       sellerConversations as ConversationInboxInfo[],
