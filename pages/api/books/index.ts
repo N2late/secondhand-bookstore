@@ -21,12 +21,9 @@ export default async function handler(
         errors: [{ message: 'Unauthorized. No valid session token passed' }],
       });
     }
-    console.log('I am here 2');
 
     const { title, author, bookConditionId, languageId, imgPath, price } =
       req.body.book;
-
-    console.log('image path', imgPath);
 
     const { genres } = req.body;
 
@@ -61,10 +58,10 @@ export default async function handler(
           errors: [{ message: 'At least one genre is required' }],
         });
     }
-    console.log('I am here 3');
+
     /* Creating a new book. */
     const newBook = await createBook(req.body.book);
-    console.log('I am here 4');
+
     /* Inserting the genres of the book into the database. */
     genres.map(async (genre: string) => {
       await insertBookGenre(Number(newBook[0].id), Number(genre));

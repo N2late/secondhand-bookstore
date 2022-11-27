@@ -9,6 +9,7 @@ const AblyChatComponent = ({
   myPersonalData,
   correspondent,
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let inputBox = null;
   const messageEndRef = useRef(null);
 
@@ -67,6 +68,7 @@ const AblyChatComponent = ({
     await sendChatMessage();
   }
 
+  /* It's a function that takes the receivedMessages array and maps it to a new array of messages. */
   const messages = receivedMessages.map((message) => {
     const sender = message.senderId || message.name.replaceAll('"', '');
     const author =

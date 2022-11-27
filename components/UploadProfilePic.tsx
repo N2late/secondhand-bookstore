@@ -17,10 +17,9 @@ function UploadProfilePic({ setProfilePicture, cloudinaryAPI }: Props) {
     setProfilePicture(URL.createObjectURL(newFile));
 
     /* Uploading the file to Cloudinary. */
-    const imageUrlStr = await imageUploadToCloudinary(
-      newFile,
-      cloudinaryAPI,
-    ).then((res) => setProfilePicture(res));
+    await imageUploadToCloudinary(newFile, cloudinaryAPI).then((res) =>
+      setProfilePicture(res),
+    );
 
     /* Calling the function that was passed in as a prop and setting the new state in the parent component */
   };

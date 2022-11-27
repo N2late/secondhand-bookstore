@@ -23,7 +23,7 @@ function MessageBox({
   const [messageSentError, setMessageSentError] = useState('');
 
   const handleOnClick = async () => {
-    if (message.length < 10) {
+    if (message.length < 2) {
       setMessageSentError('Please write a message');
       return;
     }

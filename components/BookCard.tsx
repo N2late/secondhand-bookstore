@@ -9,7 +9,7 @@ type Props = {
 
 function BookCard(props: Props) {
   const { book } = props;
-  const { title, author, price, imgPath } = book;
+  const { title, author, price } = book;
 
   return (
     <div css={styles.bookCardContainer}>
