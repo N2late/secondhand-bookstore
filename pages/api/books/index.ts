@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createBook, getBooks } from '../../../database/books';
 import { insertBookGenre } from '../../../database/genres';
 import { getValidSessionByToken } from '../../../database/sessions';
+import { validateTokenFromSecret } from '../../../utilis/csrf';
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,6 +20,25 @@ export default async function handler(
     if (!session) {
       return res.status(400).json({
         errors: [{ message: 'Unauthorized. No valid session token passed' }],
+      });
+    }
+
+    const { csrfToken } = req.body;
+
+    /* This is checking if the user has passed a CSRF token. If they have not, it will return an error. */
+
+    if (!csrfToken) {
+      return res.status(400).json({
+        errors: [{ message: 'CSRF token is required' }],
+      });
+    }
+
+    /* This is checking if the user has passed a valid CSRF token. If they have not, it will return an error. */
+    try {
+      validateTokenFromSecret(session.csrfSecret, csrfToken);
+    } catch (error) {
+      return res.status(400).json({
+        errors: [{ message: 'Invalid CSRF token' }],
       });
     }
 

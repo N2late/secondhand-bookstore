@@ -13,11 +13,13 @@ import { getBookConditions } from '../../../database/bookConditions';
 import { getAllBookInfoById } from '../../../database/books';
 import { getGenres } from '../../../database/genres';
 import { getLanguages } from '../../../database/languages';
+import { getValidSessionByToken } from '../../../database/sessions';
 import { getUserBySessionToken } from '../../../database/users';
 import { styles } from '../../../styles/auth/auth';
 import { addBookStyles } from '../../../styles/books/addBook';
 import { Genre } from '../../../types/genres';
 import { User } from '../../../types/user';
+import { createTokenFromSecret } from '../../../utilis/csrf';
 
 type Props = {
   genresWithLabel: Genre[];
@@ -25,6 +27,7 @@ type Props = {
   bookConditionsWithLabel: GroupBase<{ value: number; label: string }>[];
   cloudinaryAPI: string;
   book: string; // because it is passed as json string due to date values
+  csrfToken: string;
 };
 
 export default function EditBook({
@@ -33,6 +36,7 @@ export default function EditBook({
   bookConditionsWithLabel,
   cloudinaryAPI,
   book,
+  csrfToken,
 }: Props) {
   const bookEdit = JSON.parse(book);
 
@@ -112,6 +116,7 @@ export default function EditBook({
     const bodyDataObj = {
       bookObj,
       genres,
+      csrfToken,
     };
 
     const res = await fetch(`/api/books/${bookEdit.id}`, {
@@ -316,7 +321,7 @@ export default function EditBook({
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const token = context.req.cookies.sessionToken;
-
+  const session = await getValidSessionByToken(token);
   const user = await getUserBySessionToken(token);
   const bookId = context.params?.bookId;
 
@@ -350,6 +355,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   bookWithAllGenres.genre = book.map((b) => b.genre);
   bookWithAllGenres.genreId = book.map((b) => b.genreId);
 
+  const csrfToken = await createTokenFromSecret(session!.csrfSecret);
   const cloudinaryAPI = process.env.CLOUDINARY_KEY;
   const genres = await getGenres();
   const languages = await getLanguages();
@@ -377,6 +383,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       bookConditionsWithLabel,
       cloudinaryAPI,
       book: JSON.stringify(bookWithAllGenres),
+      csrfToken,
     },
   };
 }

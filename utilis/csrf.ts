@@ -16,7 +16,8 @@ export function createCsrfSecret() {
  * @param {string} secret - The secret key used to sign the token.
  * @returns A token
  */
-export function createTokenFromSecret(secret: string) {
+export function createTokenFromSecret(secret: string | undefined) {
+  if (!secret) return;
   return tokens.create(secret);
 }
 
