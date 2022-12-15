@@ -7,6 +7,7 @@ import {
 } from '../../../database/books';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { getUserBySessionToken } from '../../../database/users';
+import { validateTokenFromSecret } from '../../../utilis/csrf';
 
 // book with id
 export default async function handler(
@@ -40,6 +41,25 @@ export default async function handler(
     if (!session) {
       res.status(400).json({ errors: [{ message: 'Session is invalid' }] });
       return;
+    }
+
+    const { csrfToken } = req.body;
+
+    /* This is checking if the user has passed a CSRF token. If they have not, it will return an error. */
+
+    if (!csrfToken) {
+      return res.status(400).json({
+        errors: [{ message: 'CSRF token is required' }],
+      });
+    }
+
+    /* This is checking if the user has passed a valid CSRF token. If they have not, it will return an error. */
+    try {
+      validateTokenFromSecret(session.csrfSecret, csrfToken);
+    } catch (error) {
+      return res.status(400).json({
+        errors: [{ message: 'Invalid CSRF token' }],
+      });
     }
 
     const user = await getUserBySessionToken(session.token);

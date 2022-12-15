@@ -10,6 +10,7 @@ import UploadImage from '../../components/UploadImage';
 import { getBookConditions } from '../../database/bookConditions';
 import { getGenres } from '../../database/genres';
 import { getLanguages } from '../../database/languages';
+import { getValidSessionByToken } from '../../database/sessions';
 import { getUserBySessionToken } from '../../database/users';
 import { styles } from '../../styles/auth/auth';
 import { addBookStyles } from '../../styles/books/addBook';
@@ -17,6 +18,7 @@ import { BookCondition } from '../../types/bookConditions';
 import { Genre } from '../../types/genres';
 import { Language } from '../../types/languages';
 import { User } from '../../types/user';
+import { createTokenFromSecret } from '../../utilis/csrf';
 
 type Props = {
   genresWithLabel: Genre[];
@@ -24,6 +26,7 @@ type Props = {
   bookConditionsWithLabel: BookCondition[];
   user: User;
   cloudinaryAPI: string;
+  csrfToken: string;
 };
 
 export default function AddBookForSell({
@@ -32,6 +35,7 @@ export default function AddBookForSell({
   bookConditionsWithLabel,
   user,
   cloudinaryAPI,
+  csrfToken,
 }: Props) {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -88,6 +92,7 @@ export default function AddBookForSell({
     const bodyDataObj = {
       book,
       genres,
+      csrfToken,
     };
 
     const res = await fetch(`${domain}/api/books`, {
@@ -281,7 +286,7 @@ export default function AddBookForSell({
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const token = context.req.cookies.sessionToken;
-
+  const session = await getValidSessionByToken(token);
   const user = await getUserBySessionToken(token);
 
   if (!user) {
@@ -292,6 +297,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       },
     };
   }
+
+  const csrfToken = createTokenFromSecret(session!.csrfSecret);
   const cloudinaryAPI = process.env.CLOUDINARY_KEY;
   const genres = await getGenres();
   const languages = await getLanguages();
@@ -318,6 +325,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       languagesWithLabel,
       bookConditionsWithLabel,
       cloudinaryAPI,
+      csrfToken,
     },
   };
 }

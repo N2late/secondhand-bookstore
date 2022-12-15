@@ -8,18 +8,21 @@ import { useState } from 'react';
 import BookCard from '../components/BookCard';
 import UploadProfilePic from '../components/UploadProfilePic';
 import { getBooksByUserId } from '../database/books';
+import { getValidSessionByToken } from '../database/sessions';
 import { getUserBySessionTokenWithImgEmail } from '../database/users';
 import { styles } from '../styles/auth/auth';
 import { bookDetailsStyles } from '../styles/books/bookDetails';
 import { profileStyles } from '../styles/profile';
 import { BookSmallPreview } from '../types/book';
 import { User } from '../types/user';
+import { createCsrfSecret, createTokenFromSecret } from '../utilis/csrf';
 
 type Props = {
   user: User;
   books: BookSmallPreview[];
   cloudinaryAPI: string;
   setUser: (arg: undefined) => void;
+  csrfToken: string;
 };
 
 export default function Profile({
@@ -27,6 +30,7 @@ export default function Profile({
   books,
   cloudinaryAPI,
   setUser,
+  csrfToken,
 }: Props) {
   const [editProfile, setEditProfile] = useState(false);
   const [username, setUsername] = useState(user.username);
@@ -48,6 +52,7 @@ export default function Profile({
         username,
         email,
         imgPath: profilePicture,
+        csrfToken,
       }),
     });
     const data = await res.json();
@@ -63,6 +68,12 @@ export default function Profile({
   const handleDelete = async () => {
     const res = await fetch(`/api/users/${user.username}`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        csrfToken,
+      }),
     });
     const data = await res.json();
     if (data.errors) {
@@ -214,7 +225,7 @@ export default function Profile({
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const token = context.req.cookies.sessionToken;
-
+  const session = await getValidSessionByToken(token);
   const user = await getUserBySessionTokenWithImgEmail(token);
 
   if (!user) {
@@ -225,7 +236,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       },
     };
   }
-
+  const csrfToken = createTokenFromSecret(session!.csrfSecret);
   const cloudinaryAPI = process.env.CLOUDINARY_KEY;
   const books = await getBooksByUserId(String(user.id));
 
@@ -234,6 +245,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       user,
       books,
       cloudinaryAPI,
+      csrfToken,
     },
   };
 }

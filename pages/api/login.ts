@@ -4,11 +4,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createSession } from '../../database/sessions';
 import { getUserWithPasswordHashByEmail } from '../../database/users';
 import { createSerializedSignupTokenCookie } from '../../utilis/cookies';
-import { createCsrfSecret } from '../../utilis/csrf';
+import { createCsrfSecret, createTokenFromSecret } from '../../utilis/csrf';
 
 export type LoginResponseBody =
   | { errors: { message: string }[] }
-  | { user: { username: string } };
+  | { user: { username: string; csrfToken: string | undefined } };
 
 export default async function handler(
   req: NextApiRequest,
@@ -60,6 +60,8 @@ export default async function handler(
       secret,
     );
 
+    const csrfToken = createTokenFromSecret(secret);
+
     /* Creating a cookie with the session token. */
     const serialezedCookie = createSerializedSignupTokenCookie(session.token);
 
@@ -69,6 +71,7 @@ export default async function handler(
       .json({
         user: {
           username: user.username,
+          csrfToken: csrfToken,
         },
       });
   } else {
